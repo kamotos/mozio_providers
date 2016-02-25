@@ -1,0 +1,13 @@
+app:
+  build: ..
+  volumes:
+   - ..:/code
+   - /opt/pip/:/root/.cache/pip/
+  env_file:
+   - .env
+  expose:
+   - "3010"
+  log_opt:
+    max-size: 1k
+#  ports:
+#   - "3010:3010"

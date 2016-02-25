@@ -1,0 +1,11 @@
+site_name: providers
+site_description: Providers covered areas API
+repo_url: https://github.com/kamotos/mozio-providers
+site_dir: site
+copyright: Copyright &copy; 2015, <a href="https://github.com/kamotos">kamotos</a>.
+
+pages:
+  - Home: 'index.md'
+  - API:
+    - Authentication: 'api/authentication.md'
+    - Users: 'api/users.md'

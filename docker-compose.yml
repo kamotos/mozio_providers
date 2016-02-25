@@ -1,0 +1,19 @@
+# App
+web:
+  extends:
+    file: ./docker/app.yml
+    service: app
+  command: python providers/manage.py runserver 0.0.0.0:3010 --configuration Local
+  links:
+   - db
+   - redis
+  ports:
+    - "3010:3010"
+db:
+  image: postgres 
+  volumes:
+   - /opt/mozio/postgres/data:/var/lib/postgresql/data
+redis:
+  image: redis
+  volumes:
+    - /opt/mozio/redis/data:/data
