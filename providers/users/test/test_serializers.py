@@ -25,3 +25,15 @@ class TestCreateUserSerializer(TestCase):
 
         user = serializer.save()
         ok_(check_password(self.user_data.get('password'), user.password))
+
+    def test_serializer_with_invalid_currency(self):
+        pass
+
+    def test_serializer_with_invalid_language(self):
+        pass
+
+    def test_serializer_with_non_unique_email(self):
+        pass
+
+    def test_serializer_create_user_with_username_eq_email(self):
+        pass

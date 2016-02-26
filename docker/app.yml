@@ -8,6 +8,6 @@ app:
   expose:
    - "3010"
   log_opt:
-    max-size: 1k
+    max-size: 10k
 #  ports:
 #   - "3010:3010"

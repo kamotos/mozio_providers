@@ -6,5 +6,5 @@ RUN apt-get update
 RUN apt-get install -y gettext
 RUN mkdir ~/.pip/
 RUN pip install \
-    -r requirements/local.txt \
+    -r requirements/local.txt
 EXPOSE 3010
