@@ -15,18 +15,18 @@ class Common(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
-
+        'django.contrib.gis',
 
         # Third party apps
         'rest_framework',            # utilities for rest apis
         'rest_framework.authtoken',  # token authentication
+        'rest_framework_gis',
         'django_rq',                 # asynchronous queuing
         'versatileimagefield',       # image manipulation
 
-        # Your apps
         'authentication',
-        'users'
-
+        'users',
+        'services_areas',
     )
 
     # https://docs.djangoproject.com/en/1.8/topics/http/middleware/

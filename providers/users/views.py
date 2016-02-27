@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from .models import User
 from .permissions import IsOwnerOrReadOnly, IsOwnerOrAdmin
 from .serializers import CreateUserSerializer, UserSerializer, ProviderSerializer
+from services_areas.serializers import ServiceAreaSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -15,6 +16,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.exclude(is_staff=True)
     serializer_class = UserSerializer
     permission_classes = (IsOwnerOrReadOnly, )
+    get_user_for_permission = lambda view, obj: obj
 
     def create(self, request, *args, **kwargs):
         self.serializer_class = CreateUserSerializer
@@ -37,6 +39,14 @@ class UserViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         self.serializer_class = ProviderSerializer
         return super(UserViewSet, self).retrieve(request, *args, **kwargs)
+
+    @detail_route(url_path="services-areas")
+    def services_areas(self, request, *args, **kwargs):
+        serializer = ServiceAreaSerializer(
+            self.get_object().servicearea_set.all(),
+            many=True
+        )
+        return Response(serializer.data)
 
     def destroy(self, request, *args, **kwargs):
         self.permission_classes = (IsOwnerOrAdmin, )

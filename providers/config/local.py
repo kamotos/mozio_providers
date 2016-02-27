@@ -39,8 +39,8 @@ class Local(Common):
 
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "HOST": os.getenv('DB_1_PORT_5432_TCP_ADDR', '127.0.0.1'),
+            "ENGINE": "django.contrib.gis.db.backends.postgis",
+            "HOST": os.getenv('GEODB_1_PORT_5432_TCP_ADDR', '127.0.0.1'),
             "NAME": "postgres",
             "USER": "postgres"
         }

@@ -19,7 +19,7 @@ class User(AbstractUser):
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(_("Name"), max_length=100)
-    phone_number = models.CharField(_("Phone number"), max_length=30)
+    phone_number = models.CharField(_("Phone number"), max_length=40)
     language = models.CharField(
         _("Language"), max_length=2, choices=global_settings.LANGUAGES,
         default='en'

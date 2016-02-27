@@ -1,0 +1,38 @@
+# App
+web:
+  extends:
+    file: app.yml
+    service: app
+  dockerfile: ./docker/Dockerfile-production
+  command: gunicorn config.wsgi:application -b 0.0.0.0:3010
+  environment:
+   - REQUIREMENTS_FILE=prod.txt
+   - DJANGO_SETTINGS_MODULE=config.settings.production
+  links:
+   - db
+   - worker
+   - redis
+  ports:
+   - "3010:3010"
+
+worker:
+  extends:
+    file: app.yml
+    service: app
+  dockerfile: ./docker/Dockerfile-production
+  command: celery -A lessivapp worker --without-gossip --without-mingle --without-heartbeat
+  links:
+    - db
+    - redis
+  environment:
+    C_FORCE_ROOT: 1
+
+db:
+  image: postgres
+  volumes:
+   - /opt/lessivapp/postgres:/var/lib/postgresql/data
+
+redis:
+  image: redis
+  volumes:
+    - /opt/lessivapp/redis/data:/data

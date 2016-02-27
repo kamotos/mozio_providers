@@ -7,11 +7,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
+from services_areas.views import ServiceAreaViewSet
 
 from users.views import UserViewSet
 
 router = DefaultRouter()
 router.register(r'providers', UserViewSet)
+router.register(r'services-areas', ServiceAreaViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),

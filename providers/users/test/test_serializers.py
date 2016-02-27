@@ -1,9 +1,10 @@
 from django.test import TestCase
 from django.forms.models import model_to_dict
 from django.contrib.auth.hashers import check_password
-from nose.tools import eq_, ok_
+from nose.tools import eq_, ok_, raises
+from rest_framework.exceptions import ValidationError
 from .factories import UserFactory
-from ..serializers import CreateUserSerializer
+from ..serializers import CreateUserSerializer, UserSerializer
 
 
 class TestCreateUserSerializer(TestCase):
@@ -32,8 +33,26 @@ class TestCreateUserSerializer(TestCase):
     def test_serializer_with_invalid_language(self):
         pass
 
+    @raises(ValidationError)
     def test_serializer_with_non_unique_email(self):
-        pass
+        user = UserFactory()
+        self.user_data['email'] = user.email
+        serializer = CreateUserSerializer(data=self.user_data)
+        serializer.is_valid(True)
 
     def test_serializer_create_user_with_username_eq_email(self):
-        pass
+        serializer = CreateUserSerializer(data=self.user_data)
+        serializer.is_valid()
+        created_user = serializer.create(serializer.validated_data)
+        ok_(created_user.username, created_user.email)
+
+    def test_serializer_update_user_with_username_eq_email(self):
+        instance = UserFactory()
+        data = model_to_dict(instance)
+        data['email'] = "newemail@gmail.com"
+
+        serializer = UserSerializer(instance=UserFactory, data=data)
+        serializer.is_valid()
+        updated_user = serializer.update(instance, serializer.validated_data)
+
+        ok_(updated_user.username, updated_user.email)

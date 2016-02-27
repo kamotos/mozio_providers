@@ -7,12 +7,17 @@ web:
   links:
    - db
    - redis
+   - geodb
   ports:
     - "3010:3010"
 db:
   image: postgres 
   volumes:
    - /opt/mozio/postgres/data:/var/lib/postgresql/data
+geodb:
+  image: mdillon/postgis
+  volumes:
+   - /opt/mozio/postgis/data:/var/lib/postgresql/data
 redis:
   image: redis
   volumes:

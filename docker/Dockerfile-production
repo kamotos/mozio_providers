@@ -1,0 +1,8 @@
+FROM python:3.4
+ENV PYTHONUNBUFFERED 1
+ADD . /code
+WORKDIR /code
+RUN mkdir ~/.pip/
+RUN pip install -r requirements/production.txt --ignore-installed
+EXPOSE 3010
+

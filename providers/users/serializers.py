@@ -14,6 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
             'id', 'name', 'email', 'phone_number', 'language',  'currency',
             'auth_token'
         )
+        read_only_fields = ('auth_token', )
 
     def update(self, instance, validated_data):
         """
@@ -51,7 +52,8 @@ class CreateUserSerializer(serializers.ModelSerializer):
             EXISTING_EMAIL: _("This email address is already used")
         }
         extra_kwargs = {
-            'password': {'write_only': True}
+            'password': {'write_only': True},
+            'email': {'required': True}
         }
 
     def validate_email(self, value):
