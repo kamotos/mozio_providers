@@ -20,7 +20,7 @@ class ServiceAreaViewSet(viewsets.ModelViewSet):
         if lat and lng:
             try:
                 point = Point(float(lng), float(lat))
-            except TypeError:
+            except (TypeError, ValueError):
                 raise ValidationError('Invalid lat/lng parameters')
             else:
                 self.queryset = self.queryset.filter(area__contains=point)
