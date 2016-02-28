@@ -22,7 +22,6 @@ class Common(Configuration):
         'rest_framework.authtoken',  # token authentication
         'rest_framework_gis',
         'django_rq',                 # asynchronous queuing
-        'versatileimagefield',       # image manipulation
 
         'authentication',
         'users',

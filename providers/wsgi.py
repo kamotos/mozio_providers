@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 """
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "providers.config")
 os.environ.setdefault("DJANGO_CONFIGURATION", "Production")
 
 from configurations.wsgi import get_wsgi_application  # noqa
