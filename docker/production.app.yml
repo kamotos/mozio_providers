@@ -4,21 +4,20 @@ web:
     file: app.yml
     service: app
   dockerfile: ./docker/Dockerfile-production
-  command: gunicorn config.wsgi:application -b 0.0.0.0:3060
+  env_file: .env
+  command:  gunicorn providers.wsgi:application -b 0.0.0.0:3060  --pythonpath ./providers
   environment:
-   - REQUIREMENTS_FILE=production.txt
-   - DJANGO_SETTINGS_MODULE=config.settings.production
+   - DJANGO_CONFIGURATION=Production
   links:
-   - db
-   - worker
+   - geodb
    - redis
   ports:
    - "3060:3060"
 
-db:
-  image: postgres
+geodb:
+  image: mdillon/postgis
   volumes:
-   - /opt/mozio/postgres:/var/lib/postgresql/data
+   - /opt/mozio/postgis/data:/var/lib/postgresql/data
 
 redis:
   image: redis
