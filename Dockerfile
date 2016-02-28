@@ -9,4 +9,4 @@ RUN apt-get install -y \
 RUN mkdir ~/.pip/
 RUN pip install \
     -r requirements/local.txt
-EXPOSE 3010
+EXPOSE 3060

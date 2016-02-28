@@ -3,13 +3,13 @@ web:
   extends:
     file: ./docker/app.yml
     service: app
-  command: python providers/manage.py runserver 0.0.0.0:3010 --configuration Local
+  command: python providers/manage.py runserver 0.0.0.0:3060 --configuration Local
   links:
    - db
    - redis
    - geodb
   ports:
-    - "3010:3010"
+    - "3060:3060"
 db:
   image: postgres 
   volumes:
