@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id', 'name', 'email', 'phone_number', 'language',  'currency',
+            'id', 'name', 'email', 'phone_number', 'language', 'currency',
             'auth_token'
         )
         read_only_fields = ('auth_token', )
@@ -33,7 +33,7 @@ class ProviderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id', 'name', 'phone_number', 'language',  'currency', 'url'
+            'id', 'name', 'phone_number', 'language', 'currency', 'url'
         )
 
 

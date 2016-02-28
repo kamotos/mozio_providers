@@ -103,7 +103,7 @@ class Common(Configuration):
     USE_TZ = True
     LOGIN_REDIRECT_URL = '/'
 
-    # Static Files
+    # Static Filesfalke
     STATIC_ROOT = join(os.path.dirname(BASE_DIR), 'staticfiles')
     STATIC_URL = '/static/'
     STATICFILES_FINDERS = (

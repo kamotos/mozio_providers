@@ -98,5 +98,3 @@ class TestUserDetailAPI(APITestCase):
         response = self.client.get(reverse('user-list'))
         eq_(response.status_code, 200)
         ok_('auth_token' not in response.json()['results'][0])
-
-

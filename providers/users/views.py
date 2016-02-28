@@ -1,6 +1,6 @@
-from rest_framework import decorators, viewsets, mixins
+from rest_framework import viewsets
 from rest_framework.decorators import detail_route, list_route
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from .models import User
@@ -16,7 +16,9 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.exclude(is_staff=True)
     serializer_class = UserSerializer
     permission_classes = (IsOwnerOrReadOnly, )
-    get_user_for_permission = lambda view, obj: obj
+
+    def get_user_for_permission(self, obj):
+        return obj
 
     def create(self, request, *args, **kwargs):
         self.serializer_class = CreateUserSerializer

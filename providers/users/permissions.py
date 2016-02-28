@@ -18,7 +18,8 @@ class IsOwnerOrAdmin(permissions.BasePermission):
     """
     Object-level permission to only allow owners of an object or admins to edit it.
     """
-    get_user_for_permission = lambda view, obj: obj.user
+    def get_user_for_permission(self, obj):
+        return obj.user
 
     def has_object_permission(self, request, view, obj):
 

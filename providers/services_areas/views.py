@@ -1,5 +1,4 @@
-import json
-from django.contrib.gis.geos import GEOSGeometry, Point
+from django.contrib.gis.geos import Point
 from rest_framework import viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
@@ -13,7 +12,9 @@ class ServiceAreaViewSet(viewsets.ModelViewSet):
     queryset = ServiceArea.objects.all()
     permission_classes = (IsAuthenticated, )
     serializer_class = ServiceAreaSerializer
-    get_user_for_permission = lambda view, obj: obj.provider
+
+    def get_user_for_permission(self, obj):
+        return obj.provider
 
     def list(self, request, *args, **kwargs):
         lat, lng = request.query_params.get('lat'), request.query_params.get('lng')
