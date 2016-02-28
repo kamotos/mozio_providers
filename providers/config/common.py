@@ -82,7 +82,14 @@ class Common(Configuration):
     )
 
     # Postgres
-    #DATABASES = values.DatabaseURLValue('postgres://localhost/providers')
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.contrib.gis.db.backends.postgis",
+            "HOST": os.getenv('GEODB_1_PORT_5432_TCP_ADDR', '127.0.0.1'),
+            "NAME": "postgres",
+            "USER": "postgres"
+        }
+    }
 
     # General
     APPEND_SLASH = False
